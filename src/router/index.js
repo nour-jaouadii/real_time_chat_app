@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import chat from "@/components/chat.vue";
 
 Vue.use(VueRouter);
 
@@ -11,6 +12,12 @@ const routes = [
     component: Home
   },
   {
+    path: "/chat",
+    name: "chat",
+    component: chat,
+    props:true, // you accept props as a parameter when we redirect them to this route(chat.vue)
+  },
+  {
     path: "/about",
     name: "About",
     // route level code-splitting
@@ -19,6 +26,7 @@ const routes = [
     component: function() {
       return import(/* webpackChunkName: "about" */ "../views/About.vue");
     }
+
   }
 ];
 
