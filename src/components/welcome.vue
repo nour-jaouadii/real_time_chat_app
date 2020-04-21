@@ -31,7 +31,7 @@ export default {
     enterChat(){
       if(this.name){
            this.$router.push({name: 'chat', params: {name: this.name} }) 
-           //  so we're redirecting them to chat component and we're passing the (name) in data a parameter  which is actualy a prop in chat.vue
+           //  so we're redirecting them to chat component and we're passing the (name) in data as parameter  which is actualy a prop in chat.vue
            // and we said that u want to accept  this prop in chat.vue by passing it in router (  props:true,)
           this.feedback= ""
       }else{

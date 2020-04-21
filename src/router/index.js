@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/", 
     name: "Home",
     component: Home
   },
@@ -16,6 +16,15 @@ const routes = [
     name: "chat",
     component: chat,
     props:true, // you accept props as a parameter when we redirect them to this route(chat.vue)
+     // so we want to check that params(name) actually exist before we loaded the check component
+    beforeEnter: (to, from, next ) => {
+         //console.log(to.params.name)
+         if(to.params.name){
+           next()
+         }else {
+          next(Home)  
+         }
+    }
   },
   {
     path: "/about",
