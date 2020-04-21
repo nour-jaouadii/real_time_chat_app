@@ -3,25 +3,39 @@
         <form @submit.prevent='addMessage'>
            <label for="new-message">New Message (enter to add) </label>
            <input type="text" name="new-message" id="" v-model='newMessage' > 
-
+           <p class="red-text" v-if="feedback" > {{feedback}} </p>
         </form> 
     </div>
 </template>
 
 <script>
+import db from '@/firebase/init'
 export default {
     name:'New Message ',
      props: ['name'], // name from welcome  (we recieve a prop from parent component)
     data() {
         return{
             newMessage: null, 
-
+            feedback: null,
         }
     },
     methods: {
         addMessage(){
-            console.log(this.newMessage, this.name, Date.now)
+            //console.log(this.newMessage, this.name, Date.now)
+            if(this.newMessage){
+               db.collection('messages').add({
+                    content:this.newMessage,
+                    name: this.name,
+                    timestamp:Date.now()     
+               }).catch(err =>{
+                   console.log(err)
+               } )
+               this.feedback = null
+               this.newMessage = null
+            }else{
+                this.feedback = "you must enter a message in order to send one"
 
+            }
         } 
     }
 }
